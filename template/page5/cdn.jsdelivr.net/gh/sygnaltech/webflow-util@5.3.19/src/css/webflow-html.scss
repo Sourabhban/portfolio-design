@@ -1,0 +1,238 @@
+
+/**
+ * SCSS for Sygnal Webflow Util HTML library
+ */
+
+/**
+ * @use: This is the modern replacement for @import. 
+ * Instead of dumping all the imported styles into the global scope, @use treats each imported file as a 
+ * separate module with its own private scope. This means that variables, mixins, and functions from 
+ * the imported file have to be accessed with a namespace based on the filename. 
+ * This helps to prevent naming conflicts and makes the code easier to understand.
+ */
+        
+
+@use '../webflow-html/limit-items';
+
+ // Temporarily hide until decoded
+[wfu-decode] {
+    display: none;
+}
+   
+/*
+ * Text trucation w/ ellipsis support
+ */
+
+// Applies to all, defaults to 1 line
+[wfu-truncate] {
+    position: relative;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+[wfu-truncate="2"] {
+    -webkit-line-clamp: 2;
+}
+
+[wfu-truncate="3"] {
+    -webkit-line-clamp: 3;
+}
+
+[wfu-truncate="4"] {
+    -webkit-line-clamp: 4;
+}
+
+[wfu-truncate="5"] {
+    -webkit-line-clamp: 5;
+}
+
+
+/*
+[wfu-truncate]::after {
+  content: "";
+  text-align: right;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 70%;
+  height: 1.2em;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+}
+*/
+
+
+/*
+ * Filtered elements
+ * hide by default, until filter status is determined
+ */
+
+[wfu-filter] {
+    display: none;
+}
+
+[wfu-filter-eval] {
+    display: none;
+}
+
+[wfu-filter-match] {
+    display: none;
+}
+
+[wfu-filter-func] {
+    display: none;
+}
+
+[wfu-sort] {
+  display: none;
+}
+
+
+/*
+ * Skeleton loader
+ * apply skeleton loader effect to elements targeted for parsing by WFU.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Redacted&display=swap');
+
+ 
+.w-richtext[wfu-lists-loading] li {
+    font-family: 'Redacted', cursive;
+    color: black;
+    em {
+        font-style: normal;
+    }
+    
+    a {
+        color: inherit;
+    }
+
+    display: inline-block; // contents;
+  
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        color: hsl(200, 20%, 80%);
+    }
+
+    100% {
+        color: hsl(200, 20%, 95%);
+    }
+}
+
+
+
+
+/*
+ * Hide elements on spec 
+ */
+
+/* Webflow list notes
+   populated list 
+
+<div class="w-dyn-list">
+<div role="list" class="w-dyn-items">
+<div role="listitem" class="w-dyn-item">
+<div><h4>10 Quick Tips About Blogging</h4></div>
+</div>
+</div></div></div>
+
+   no elements
+
+<div class="w-dyn-list">
+<div class="w-dyn-empty">
+<div>No items found.</div>
+</div>
+</div>   
+
+- zero w-dyn-items
+- maybe a w-dyn-empty, if it was not suppressed
+
+FS empty list
+- zero w-dyn-items 
+
+*/
+
+// Hide elements which contain no collection list items
+[wfu-hide="empty-lists"]:not(:has(.w-dyn-item)) {  
+    display: none; 
+}
+[wfu-hide="empty-collection-list"]:not(:has(.w-dyn-item)) {  
+    display: none; 
+}
+
+[wfu-suppress="empty-lists"] {
+    display: none;
+}
+
+/* test */ 
+
+
+
+
+/*
+ * HTML Table Themes 
+ * relocated to webflow-embed.scss 
+ */
+
+/*
+ [wfu-theme="default"] {
+    table {
+      border-collapse: collapse;
+      margin-top: 10px;
+  //    background-color: green;
+      tr {
+        td {
+          padding: 0.2rem 1rem;
+          border: 1px solid white;
+          vertical-align: top; 
+          margin-bottom: 5px; 
+          
+          p {
+            line-height: 22px;
+            font-size: 14px; 
+  //          margin-bottom: 0; // 5px;
+            
+            span {
+    //          line-height: 22px;
+    //          font-size: 14px; 
+              }
+              
+          }
+  
+          ul {
+  //          margin-left: 10px;
+            padding-left: 5px; // 10px;
+            padding-top: 10px;
+            padding-bottom: 0.2rem;
+            
+            li::marker {
+                content: "\2043"; // "&hybull;";
+                color: #2e9dff; // yellow;
+            }
+            
+            li {
+              // list-style-type: square;
+                line-height: 22px;
+                font-size: 14px; 
+                padding-left: 1ch;
+              
+                span {
+                }
+            }
+          }
+          
+        }}
+      
+      // Highlight first column
+      tr:nth-child(1) {
+        font-weight: 800;
+        background-color: rgba(255,255,255,0.2); // #333;
+      }
+    }
+  }
+  
+*/
